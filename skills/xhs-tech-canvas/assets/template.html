@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XHS Tech Canvas v3.0 - Multi-Theme & 3x Auto-Export Template</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700;900&family=JetBrains+Mono:wght@400;700;800&family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" crossorigin="anonymous">
+    
+    <style>
+        :root, body[data-theme="eva-nerv"] {
+            --bg-page: #050308;
+            --bg-slide: #090610;
+            --bg-panel: rgba(18, 11, 29, 0.92);
+            --bg-recessed: #040207;
+            --text-main: #f8fafc;
+            --text-muted: #a1a1aa;
+            --accent-primary: #ff6b00;
+            --accent-secondary: #84cc16;
+            --accent-tertiary: #a855f7;
+            --accent-alert: #ff0033;
+            --border-slide: 2px solid #ff6b00;
+            --shadow-slide: 0 0 28px rgba(255, 107, 0, 0.22), inset 0 0 18px rgba(255, 107, 0, 0.08);
+            --grid-line: rgba(255, 107, 0, 0.07);
+            --radius-slide: 0.35rem;
+            --radius-panel: 0.25rem;
+            --panel-shadow: 0 0 18px rgba(255, 107, 0, 0.15);
+            --bar-primary: linear-gradient(180deg, #ff6b00 0%, rgba(255, 107, 0, 0.25) 100%);
+            --bar-secondary: linear-gradient(180deg, #84cc16 0%, rgba(132, 204, 22, 0.25) 100%);
+            --bar-tertiary: linear-gradient(180deg, #a855f7 0%, rgba(168, 85, 247, 0.25) 100%);
+        }
+
+        body[data-theme="cyber-void"] {
+            --bg-page: #01040d;
+            --bg-slide: #020617;
+            --bg-panel: rgba(15, 23, 42, 0.85);
+            --bg-recessed: #050b14;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent-primary: #06b6d4;
+            --accent-secondary: #10b981;
+            --accent-tertiary: #a855f7;
+            --accent-alert: #ef4444;
+            --border-slide: 2px solid rgba(6, 182, 212, 0.8);
+            --shadow-slide: 0 0 30px rgba(6, 182, 212, 0.18), inset 0 0 20px rgba(6, 182, 212, 0.08);
+            --grid-line: rgba(6, 182, 212, 0.06);
+            --radius-slide: 1.25rem;
+            --radius-panel: 0.75rem;
+            --panel-shadow: 0 0 20px rgba(6, 182, 212, 0.15);
+            --bar-primary: linear-gradient(180deg, rgba(6, 182, 212, 0.95) 0%, rgba(6, 182, 212, 0.25) 100%);
+            --bar-secondary: linear-gradient(180deg, rgba(16, 185, 129, 0.95) 0%, rgba(16, 185, 129, 0.25) 100%);
+            --bar-tertiary: linear-gradient(180deg, rgba(168, 85, 247, 0.95) 0%, rgba(168, 85, 247, 0.25) 100%);
+        }
+
+        body[data-theme="swiss-blueprint"] {
+            --bg-page: #e5e0d5;
+            --bg-slide: #f4f1ea;
+            --bg-panel: #ffffff;
+            --bg-recessed: #ebe6dc;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-primary: #1d4ed8;
+            --accent-secondary: #047857;
+            --accent-tertiary: #7e22ce;
+            --accent-alert: #ff4f00;
+            --border-slide: 3px solid #0f172a;
+            --shadow-slide: 10px 10px 0px #0f172a;
+            --grid-line: rgba(15, 23, 42, 0.07);
+            --radius-slide: 0px;
+            --radius-panel: 0px;
+            --panel-shadow: 5px 5px 0px #0f172a;
+            --bar-primary: linear-gradient(180deg, #1d4ed8 0%, #3b82f6 100%);
+            --bar-secondary: linear-gradient(180deg, #047857 0%, #10b981 100%);
+            --bar-tertiary: linear-gradient(180deg, #7e22ce 0%, #a855f7 100%);
+        }
+
+        body[data-theme="retro-crt"] {
+            --bg-page: #050400;
+            --bg-slide: #0c0900;
+            --bg-panel: rgba(24, 18, 2, 0.92);
+            --bg-recessed: #060400;
+            --text-main: #ffb000;
+            --text-muted: #b47b00;
+            --accent-primary: #ffb000;
+            --accent-secondary: #33ff33;
+            --accent-tertiary: #38bdf8;
+            --accent-alert: #ff3333;
+            --border-slide: 2px solid #ffb000;
+            --shadow-slide: 0 0 25px rgba(255, 176, 0, 0.2), inset 0 0 20px rgba(255, 176, 0, 0.08);
+            --grid-line: rgba(255, 176, 0, 0.06);
+            --radius-slide: 0.5rem;
+            --radius-panel: 0.2rem;
+            --panel-shadow: 0 0 15px rgba(255, 176, 0, 0.15);
+            --bar-primary: linear-gradient(180deg, #ffb000 0%, rgba(255, 176, 0, 0.25) 100%);
+            --bar-secondary: linear-gradient(180deg, #33ff33 0%, rgba(51, 255, 51, 0.25) 100%);
+            --bar-tertiary: linear-gradient(180deg, #38bdf8 0%, rgba(56, 189, 248, 0.25) 100%);
+        }
+
+        body {
+            background-color: var(--bg-page);
+            font-family: 'Noto Sans SC', sans-serif;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 0 3rem;
+            margin: 0;
+            overflow-x: hidden;
+            transition: background-color 0.25s ease, color 0.25s ease;
+        }
+
+        .font-tech { font-family: 'Chakra Petch', sans-serif; }
+        .font-code { font-family: 'JetBrains Mono', monospace; }
+        .font-eva-serif {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            display: inline-block;
+            transform: scaleX(0.88);
+        }
+
+        .slide {
+            width: 540px;
+            height: 720px;
+            margin-bottom: 2.25rem;
+            position: relative;
+            overflow: hidden;
+            background-color: var(--bg-slide);
+            border-radius: var(--radius-slide);
+            border: var(--border-slide);
+            box-shadow: var(--shadow-slide);
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 36px 36px;
+            transition: all 0.25s ease;
+        }
+
+        .card-export-btn {
+            opacity: 0;
+            transform: translateY(-4px);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        .slide:hover .card-export-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .theme-panel { background: var(--bg-panel); border: 2px solid var(--accent-primary); border-radius: var(--radius-panel); box-shadow: var(--panel-shadow); backdrop-filter: blur(16px); }
+        .theme-panel-secondary { background: var(--bg-panel); border: 2px solid var(--accent-secondary); border-radius: var(--radius-panel); box-shadow: var(--panel-shadow); }
+        .theme-panel-tertiary { background: var(--bg-panel); border: 2px solid var(--accent-tertiary); border-radius: var(--radius-panel); box-shadow: var(--panel-shadow); }
+        .theme-panel-alert { background: var(--bg-panel); border: 2px solid var(--accent-alert); border-radius: var(--radius-panel); box-shadow: var(--panel-shadow); }
+        .theme-recessed { background: var(--bg-recessed); border: 1px solid rgba(148, 163, 184, 0.3); border-radius: var(--radius-panel); }
+
+        .text-accent-primary { color: var(--accent-primary); }
+        .text-accent-secondary { color: var(--accent-secondary); }
+        .text-accent-tertiary { color: var(--accent-tertiary); }
+        .text-accent-alert { color: var(--accent-alert); }
+        .text-theme-main { color: var(--text-main); }
+        .text-theme-muted { color: var(--text-muted); }
+
+        .bg-accent-primary { background-color: var(--accent-primary); }
+        .bg-accent-secondary { background-color: var(--accent-secondary); }
+        .bg-accent-tertiary { background-color: var(--accent-tertiary); }
+        .bg-accent-alert { background-color: var(--accent-alert); }
+
+        .eva-hazard-bar {
+            height: 8px; width: 100%;
+            background: repeating-linear-gradient(-45deg, var(--accent-primary), var(--accent-primary) 10px, transparent 10px, transparent 20px);
+            border-top: 1px solid var(--accent-primary); border-bottom: 1px solid var(--accent-primary);
+        }
+        .eva-hazard-alert {
+            height: 8px; width: 100%;
+            background: repeating-linear-gradient(-45deg, var(--accent-alert), var(--accent-alert) 10px, transparent 10px, transparent 20px);
+            border-top: 1px solid var(--accent-alert); border-bottom: 1px solid var(--accent-alert);
+        }
+        .eva-chamfer { clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px)); }
+
+        @keyframes spin-slow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes spin-reverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
+        .animate-spin-slow { animation: spin-slow 20s linear infinite; }
+        .animate-spin-reverse { animation: spin-reverse 14s linear infinite; }
+
+        .chart-grid { background-image: linear-gradient(var(--grid-line) 1px, transparent 1px); background-size: 100% 25%; }
+        .bar-primary-fill { background: var(--bar-primary); }
+        .bar-secondary-fill { background: var(--bar-secondary); }
+        .bar-tertiary-fill { background: var(--bar-tertiary); }
+    </style>
+</head>
+<body data-theme="eva-nerv">
+
+<!-- Top Dual-Row Control Console -->
+<nav class="w-[540px] mb-6 p-3 rounded-xl bg-slate-900/95 border border-slate-700 flex flex-col gap-2.5 text-xs font-code shadow-2xl sticky top-3 z-50 backdrop-blur-md">
+    <div class="flex items-center justify-between">
+        <span class="text-slate-300 px-1 font-bold flex items-center gap-1.5">
+            <i data-lucide="sliders" class="w-4 h-4 text-orange-400"></i> 风格切换:
+        </span>
+        <div class="flex gap-1.5">
+            <button onclick="setTheme('eva-nerv')" id="btn-eva-nerv" class="px-2.5 py-1 rounded bg-orange-500 text-black font-bold transition-all">⚡ EVA 战术风</button>
+            <button onclick="setTheme('cyber-void')" id="btn-cyber-void" class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">💠 赛博深空</button>
+            <button onclick="setTheme('swiss-blueprint')" id="btn-swiss-blueprint" class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">📐 瑞士蓝图</button>
+            <button onclick="setTheme('retro-crt')" id="btn-retro-crt" class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">📟 琥珀终端</button>
+        </div>
+    </div>
+    <div class="flex items-center justify-between border-t border-slate-800 pt-2">
+        <span id="export-status" class="text-slate-300 px-1 flex items-center gap-1.5 truncate">
+            <i data-lucide="image-down" class="w-4 h-4 text-lime-400 shrink-0"></i>
+            <span>超清导图 (1620×2160):</span>
+        </span>
+        <div class="flex gap-1.5 shrink-0">
+            <button id="btn-export-all" onclick="exportAllSlidesPNG()" class="px-2.5 py-1 rounded bg-lime-500 hover:bg-lime-400 text-black font-extrabold transition-all flex items-center gap-1 shadow-md">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i> 逐张导出 PNG
+            </button>
+            <button id="btn-export-zip" onclick="exportAllSlidesZIP()" class="px-2.5 py-1 rounded bg-purple-500 hover:bg-purple-400 text-white font-extrabold transition-all flex items-center gap-1 shadow-md">
+                <i data-lucide="folder-archive" class="w-3.5 h-3.5"></i> 打包下载 ZIP
+            </button>
+        </div>
+    </div>
+</nav>
+
+<section id="export-gallery-panel" class="w-[540px] mb-6 p-3.5 rounded-xl bg-slate-900/95 border border-lime-500/60 hidden flex-col gap-2.5 font-code text-xs shadow-2xl">
+    <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+        <span class="text-lime-400 font-bold flex items-center gap-1.5">
+            <i data-lucide="sparkles" class="w-4 h-4"></i> 已渲染 3x 超清图画廊（点击缩略图直接下载 / 右键另存为）
+        </span>
+        <button onclick="document.getElementById('export-gallery-panel').classList.add('hidden')" class="text-slate-400 hover:text-white px-2 py-0.5 rounded bg-slate-800">收起</button>
+    </div>
+    <div id="export-gallery-grid" class="grid grid-cols-4 gap-2"></div>
+</section>
+
+<main class="flex flex-col items-center">
+    <!-- Populate 4 to 12 modular .slide cards here -->
+    <div class="slide flex flex-col justify-between p-8 relative">
+        <div class="w-full z-10">
+            <div class="flex justify-between items-center font-code text-xs mb-2">
+                <span class="px-2.5 py-0.5 bg-accent-primary text-black font-extrabold tracking-widest">MAGI_ARCHIVE // PAPER_BREAKDOWN</span>
+                <span class="text-accent-primary font-bold">arXiv:26XX.XXXXX</span>
+            </div>
+            <div class="eva-hazard-bar"></div>
+        </div>
+        <div class="z-10 flex flex-col items-center text-center my-auto">
+            <h1 class="font-eva-serif text-5xl text-theme-main leading-tight mb-3">核心技术破局标题</h1>
+            <div class="font-tech text-3xl font-black text-accent-primary tracking-wider uppercase mb-5">SYSTEM_ARCHITECTURE</div>
+            <div class="theme-panel eva-chamfer px-6 py-4 max-w-md">
+                <p class="text-sm font-bold text-theme-main leading-relaxed">一句话凝练论文的核心机制与 SOTA 战绩</p>
+            </div>
+        </div>
+        <div class="w-full z-10"><div class="eva-hazard-bar"></div></div>
+    </div>
+
+    <footer class="w-[540px] mt-4 mb-12 theme-panel p-6 relative z-50">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="font-tech text-lg font-bold text-accent-primary flex items-center gap-2">
+                <i data-lucide="message-square-share" class="w-5 h-5"></i> 社交媒体爆款文案
+            </h3>
+            <button id="copy-btn" onclick="copyCopywriting()" class="bg-accent-primary text-black font-extrabold px-4 py-2 rounded text-sm transition-all flex items-center gap-2">
+                <i data-lucide="copy" class="w-4 h-4"></i> 一键引爆
+            </button>
+        </div>
+        <textarea id="copy-area" readonly class="w-full h-64 theme-recessed p-4 text-theme-main text-sm focus:outline-none resize-none font-sans leading-relaxed">在此填入爆款小红书文案...</textarea>
+    </footer>
+</main>
+
+<script>
+    lucide.createIcons();
+    document.querySelectorAll('.slide').forEach((slide, idx) => {
+        const num = String(idx + 1).padStart(2, '0');
+        const btn = document.createElement('button');
+        btn.setAttribute('data-export-ignore', 'true');
+        btn.className = 'card-export-btn absolute top-2.5 right-2.5 z-50 px-2.5 py-1 rounded bg-black/85 border border-lime-400 text-lime-400 font-code text-xs font-bold flex items-center gap-1 shadow-lg hover:bg-lime-400 hover:text-black cursor-pointer';
+        btn.innerHTML = `<i data-lucide="camera" class="w-3.5 h-3.5"></i> 导出 P${num}`;
+        btn.onclick = (e) => { e.stopPropagation(); exportSingleSlide(idx); };
+        slide.appendChild(btn);
+    });
+    lucide.createIcons();
+
+    function setTheme(themeName) {
+        document.body.setAttribute('data-theme', themeName);
+        ['eva-nerv', 'cyber-void', 'swiss-blueprint', 'retro-crt'].forEach(t => {
+            const btn = document.getElementById('btn-' + t);
+            if (btn) btn.className = (t === themeName)
+                ? 'px-2.5 py-1 rounded bg-orange-500 text-black font-bold transition-all'
+                : 'px-2.5 py-1 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all';
+        });
+    }
+
+    async function renderSlideToBlob(slideEl) {
+        if (document.fonts && document.fonts.ready) await document.fonts.ready;
+        const computedBg = getComputedStyle(slideEl).backgroundColor;
+        return await htmlToImage.toBlob(slideEl, {
+            width: 540, height: 720, pixelRatio: 3, backgroundColor: computedBg, cacheBust: true,
+            style: { margin: '0', transform: 'none' },
+            filter: (node) => !(node.dataset && node.dataset.exportIgnore === 'true')
+        });
+    }
+
+    function triggerBlobDownload(blob, filename) {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = filename;
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 20000);
+    }
+
+    function addPreviewThumb(blob, filename, labelNum) {
+        const panel = document.getElementById('export-gallery-panel');
+        const grid = document.getElementById('export-gallery-grid');
+        panel.classList.remove('hidden'); panel.classList.add('flex');
+        const existing = document.getElementById('thumb-card-' + labelNum);
+        if (existing) existing.remove();
+        const url = URL.createObjectURL(blob);
+        const item = document.createElement('a');
+        item.id = 'thumb-card-' + labelNum; item.href = url; item.download = filename;
+        item.className = 'group relative block rounded border border-slate-700 overflow-hidden bg-black hover:border-lime-400 transition-all';
+        item.innerHTML = `<img src="${url}" class="w-full h-auto block" /><div class="bg-slate-900/95 text-center py-1 text-[11px] text-lime-400 font-bold group-hover:bg-lime-400 group-hover:text-black">下载 P${labelNum}</div>`;
+        grid.appendChild(item);
+    }
+
+    async function exportSingleSlide(index) {
+        const slides = document.querySelectorAll('.slide');
+        const theme = document.body.getAttribute('data-theme') || 'eva-nerv';
+        const num = String(index + 1).padStart(2, '0');
+        const blob = await renderSlideToBlob(slides[index]);
+        const filename = `xhs_card_${theme}_P${num}.png`;
+        triggerBlobDownload(blob, filename);
+        addPreviewThumb(blob, filename, num);
+    }
+
+    async function exportAllSlidesPNG() {
+        const slides = document.querySelectorAll('.slide');
+        const theme = document.body.getAttribute('data-theme') || 'eva-nerv';
+        document.getElementById('export-gallery-grid').innerHTML = '';
+        for (let i = 0; i < slides.length; i++) {
+            const num = String(i + 1).padStart(2, '0');
+            const blob = await renderSlideToBlob(slides[i]);
+            const filename = `xhs_card_${theme}_P${num}.png`;
+            triggerBlobDownload(blob, filename);
+            addPreviewThumb(blob, filename, num);
+            await new Promise(r => setTimeout(r, 350));
+        }
+    }
+
+    async function exportAllSlidesZIP() {
+        const slides = document.querySelectorAll('.slide');
+        const theme = document.body.getAttribute('data-theme') || 'eva-nerv';
+        const zip = new JSZip();
+        const folder = zip.folder(`xhs_cards_${theme}`);
+        for (let i = 0; i < slides.length; i++) {
+            const num = String(i + 1).padStart(2, '0');
+            const blob = await renderSlideToBlob(slides[i]);
+            const filename = `xhs_card_${theme}_P${num}.png`;
+            folder.file(filename, blob);
+            addPreviewThumb(blob, filename, num);
+        }
+        const copyArea = document.getElementById('copy-area');
+        if (copyArea) folder.file('xiaohongshu_copywriting.txt', copyArea.value.trim());
+        const zipBlob = await zip.generateAsync({ type: 'blob' });
+        triggerBlobDownload(zipBlob, `xhs_deck_${theme}_${slides.length}cards.zip`);
+    }
+
+    function copyCopywriting() {
+        const copyText = document.getElementById("copy-area");
+        copyText.select(); document.execCommand("copy");
+    }
+</script>
+</body>
+</html>
