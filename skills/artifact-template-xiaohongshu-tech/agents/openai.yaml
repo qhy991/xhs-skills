@@ -1,0 +1,8 @@
+interface:
+  display_name: "小红书科技图文 · Xiaohongshu Tech"
+  short_description: "从选题与口述想法到深绿科技风九图，交付可直接发布的图片和正文"
+  icon_small: "./assets/preview.png"
+  icon_large: "./assets/preview.png"
+  default_prompt: "把我的选题制作成一套小红书科技图文：沿用深绿、米白、荧光绿风格，先核查文案，再用 AI 封面插画和 Canvas 排版生成可直接发布的编号图片、正文与 ZIP。"
+policy:
+  allow_implicit_invocation: true

@@ -7,6 +7,7 @@
 | Skill | 说明 | 示例 |
 | --- | --- | --- |
 | [`xhs-tech-canvas`](skills/xhs-tech-canvas/SKILL.md) | 把论文 / 技术博客 / 系统架构拆解成 4–12 张 540×720 小红书卡片（10 种模块化母版、4 套可实时切换主题），一键导出 1620×2160 PNG + 文案 ZIP | [1000 粉复盘 · 瑞士蓝图](examples/xhs-tech-canvas/1000fans-swiss-blueprint/) |
+| [`artifact-template-xiaohongshu-tech`](skills/artifact-template-xiaohongshu-tech/SKILL.md) | 把选题 / 口述想法 / 现有文章做成 9 图小红书科技图文：深绿＋米白＋荧光绿视觉系统，AI 封面插画 + Node Canvas 精确中文排版，交付编号 JPG/PNG、总览、标题正文、来源清单与发布 ZIP | — |
 
 ## 安装
 
@@ -15,9 +16,10 @@
 ```bash
 git clone https://github.com/qhy991/xhs-skills.git
 cp -r xhs-skills/skills/xhs-tech-canvas ~/.claude/skills/
+cp -r xhs-skills/skills/artifact-template-xiaohongshu-tech ~/.claude/skills/
 ```
 
-然后在 Claude Code 里直接说「帮我把这篇论文做成小红书图文」，或输入 `/xhs-tech-canvas`。
+然后在 Claude Code 里直接说「帮我把这篇论文做成小红书图文」，或输入 `/xhs-tech-canvas`；要做深绿科技风九图时输入 `/artifact-template-xiaohongshu-tech`。
 
 ## 目录结构
 
@@ -26,6 +28,7 @@ skills/<skill-name>/      # 每个 skill 一个目录，可直接安装
   SKILL.md                # 入口：触发条件 + 工作流
   references/             # 详细规范，按需加载
   assets/                 # 模板等资源
+  scripts/                # 可选的渲染 / 打包脚本
 examples/<skill-name>/    # 用该 skill 生成的真实作品（不随 skill 安装）
 ```
 
